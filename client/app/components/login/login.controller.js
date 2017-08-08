@@ -1,5 +1,5 @@
 class LoginController {
-    constructor($state, $http, todoService, localStorageService, $q, notify) {
+    constructor($state, todoService, localStorageService, $q, notify) {
         "ngInject";
 
         this.$state = $state;

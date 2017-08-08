@@ -1,12 +1,12 @@
 import angular from 'angular';
-import Home from './home/home';
-import About from './about/about';
+import todoApp from './todoApp/todoApp';
+import login from './login/login';
 
 let componentModule = angular.module('app.components', [
-  Home,
-  About
+    todoApp,
+    login
 ])
 
-.name;
+    .name;
 
 export default componentModule;

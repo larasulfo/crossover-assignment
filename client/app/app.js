@@ -4,13 +4,15 @@ import Common from './common/common';
 import Components from './components/components';
 import AppComponent from './app.component';
 import restangular from 'restangular';
+import localStorageModule from 'angular-local-storage';
 import 'normalize.css';
 
 angular.module('app', [
     uiRouter,
     Common,
     Components,
-    restangular
+    restangular,
+    localStorageModule
   ])
   .config(($locationProvider) => {
     "ngInject";
@@ -31,5 +33,13 @@ angular.module('app', [
     });
 
 })
+    .config(['localStorageServiceProvider', (localStorageServiceProvider) => {
+        localStorageServiceProvider
+            .setPrefix('crossover')
+            .setStorageType('localStorage')
+            .setNotify(true, true)
+            .setStorageCookieDomain('localhost')
+            .setStorageCookie(45, '/', false);
+    }])
 
   .component('app', AppComponent);

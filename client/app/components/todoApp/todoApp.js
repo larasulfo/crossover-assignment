@@ -5,8 +5,6 @@ import todoAppComponent from './todoApp.component';
 let todoAppModule = angular.module('todoApp', [
     uiRouter
 ])
-
-    .component('todoApp', todoAppComponent)
     .config(($stateProvider, $urlRouterProvider) => {
         "ngInject";
 
@@ -15,9 +13,16 @@ let todoAppModule = angular.module('todoApp', [
         $stateProvider
             .state('todo_app', {
                 url: '/',
-                component: 'todoApp'
+                component: 'todoApp',
+                resolve: {
+                    todoList: (todoService) => {
+                        "ngInject";
+                        return todoService.getTodos();
+                    }
+                }
             });
     })
+    .component('todoApp', todoAppComponent)
     .name;
 
 export default todoAppModule;

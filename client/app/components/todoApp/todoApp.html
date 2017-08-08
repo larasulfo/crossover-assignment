@@ -1,3 +1,35 @@
-<div>
-  <h1>{{ $ctrl.name }}</h1>
+<div class="row">
+<div class="row">
+  <h1>Crossover Todo</h1>
+</div>
+<div class="row">
+    <div class="col-md-6 col-xs-12">
+        <div class="row">
+            <h1>In Progress</h1>
+        </div>
+        <div class="row" ondrop="drop(event)" ondragover="allowDrop(event)">
+            <div ng-repeat="task in $ctrl.todoList.notCompleted">
+
+                <div class="row" draggable="true">
+                    {{task.title}}
+                </div>
+
+            </div>
+        </div>
+    </div>
+    <div class="col-md-6 col-xs-12">
+        <div class="row">
+            <h1>Done</h1>
+        </div>
+        <div class="row" ondrop="drop(event)" ondragover="allowDrop(event)">
+            <div ng-repeat="task in $ctrl.todoList.completed track by $index">
+
+                <div class="row" draggable="true" ondragstart="angular.element(this).scope().pickItem(angular.element(this).scope().$index)">
+                    {{task.title}}
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
 </div>

@@ -8,7 +8,7 @@ import restangular from 'restangular';
 import localStorageModule from 'angular-local-storage';
 import cgNotify from '@cgross/angular-notify';
 import '@cgross/angular-notify/dist/angular-notify.css';
-import 'normalize.css';
+//import 'normalize.css';
 
 angular.module('app', [
     uiRouter,
@@ -34,7 +34,13 @@ angular.module('app', [
     });
 
     RestangularProvider.setResponseExtractor(function (response, operation) {
-        return response;
+
+        if(response.data){
+        return response.data;
+        }else{
+            return response;
+        }
+
     });
 
 })

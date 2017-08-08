@@ -1,11 +1,34 @@
 class TodoService {
 
-    constructor($q, Restangular,localStorageService) {
+    constructor($q, Restangular, localStorageService, notify,$state) {
         "ngInject";
         this._Restangular = Restangular;
         this._$q = $q;
         this._localStorageService = localStorageService;
+        this.notify = notify;
+        this.$state = $state;
 
+    }
+
+    checkLoginStatus() {
+        let sessionId = this._localStorageService.get('sessionId');
+        let username = this._localStorageService.get('username');
+        if (!sessionId || !username) {
+            this.$state.go('todo_app');
+        } else {
+            return sessionId;
+        }
+    }
+
+    checkErrors(resp) {
+        if (resp.status.toString() === '401') {
+            this.notify({message: 'You must login to continue.', classes: 'alert-danger'});
+            this._localStorageService.remove('sessionId');
+            this._localStorageService.remove('username');
+            this.$state.go('login');
+        } else {
+            this.notify({message: 'Something went wrong.', classes: 'alert-danger'});
+        }
     }
 
 
@@ -19,6 +42,39 @@ class TodoService {
 
         return deferred.promise;
     }
+
+    getTodos(skip, limit) {
+        let deferred = this._$q.defer();
+        let sessionId = this.checkLoginStatus();
+        if (sessionId) {
+            this._Restangular.one('todos').get({sessionId: sessionId, skip: skip, limit: limit}).then((response) => {
+
+
+                let result={
+                    notCompleted:[],
+                    completed:[],
+                };
+                for(let todo of response.plain()){
+                    if(todo.status=='notCompleted'){
+                        result.notCompleted.push(todo);
+                    }else if(todo.status=='completed'){
+                        result.completed.push(todo);
+                    }
+                }
+
+                deferred.resolve(result);
+
+            }).catch((resp) => {
+
+            this.checkErrors(resp);
+
+            });
+        }
+
+        return deferred.promise;
+    }
+
+
 
 }
 

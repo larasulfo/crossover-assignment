@@ -3,33 +3,19 @@ class LoginController {
         "ngInject";
 
         this.$state = $state;
-        this.$http = $http;
         this.todoService = todoService;
         this._localStorageService = localStorageService;
         this._$q = $q;
         this.notify = notify;
-        let token = localStorageService.get('authToken');
-        // if (token) {
-        //     $http.defaults.headers.common['Authorization'] = token;
-        //     laabyApi.one('users', 'me').get().then((a) => {
-        //         let user = a;
-        //         if(user.type=='laaby'){
-        //             user.type='admin';
-        //         }
-        //         let type = user.type;
-        //         if (type === 'trainee') {
-        //             $state.go('trainee.home');
-        //         } else if (type === 'health_coach') {
-        //             $state.go('health_coach.coach_panel');
-        //         } else if (type == 'admin') {
-        //             $state.go('admin.health_coaches');
-        //         }
-        //     });
-        //
-        //
-        // } else {
-        //     this.loading = false;
-        // }
+
+        this.loading = true;
+        let sessionId = localStorageService.get('sessionId');
+        let username = localStorageService.get('username');
+        if (sessionId && username) {
+            this.$state.go('todo_app');
+        } else {
+            this.loading = false;
+        }
 
     }
 

@@ -2,17 +2,22 @@ import angular from 'angular';
 import uiRouter from 'angular-ui-router';
 import Common from './common/common';
 import Components from './components/components';
+import Services from './services/services';
 import AppComponent from './app.component';
 import restangular from 'restangular';
 import localStorageModule from 'angular-local-storage';
+import cgNotify from '@cgross/angular-notify';
+import '@cgross/angular-notify/dist/angular-notify.css';
 import 'normalize.css';
 
 angular.module('app', [
     uiRouter,
     Common,
     Components,
+    Services,
     restangular,
-    localStorageModule
+    localStorageModule,
+    cgNotify
   ])
   .config(($locationProvider) => {
     "ngInject";
@@ -29,7 +34,7 @@ angular.module('app', [
     });
 
     RestangularProvider.setResponseExtractor(function (response, operation) {
-        return response.data;
+        return response;
     });
 
 })

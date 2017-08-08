@@ -4,6 +4,7 @@
   "description": "Crossover assignment",
   "main": "index.js",
   "dependencies": {
+    "@cgross/angular-notify": "^2.5.1",
     "angular": "^1.5.0",
     "angular-local-storage": "^0.6.0",
     "angular-ui-router": "^1.0.0-beta.1",

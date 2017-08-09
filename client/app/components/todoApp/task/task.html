@@ -1,19 +1,32 @@
-<div class="row">
+<div ng-dblclick="$ctrl.changeMode()" class="row">
     <div class="row">
         <div class="pull-left">
             <div>
-                <div class="col-xs-offset-2 col-xs-10">{{ $ctrl.obj.title }}</div>
+                <div ng-if="!$ctrl.updateMode" class="col-xs-offset-2 col-xs-10">{{ $ctrl.obj.title }}</div>
+                <div ng-if="$ctrl.updateMode" class="col-xs-offset-2 col-xs-10"><input type="text" class="form-control"
+                                                                                       id="title"
+                                                                                       ng-model="$ctrl.obj.title">
+                </div>
             </div>
         </div>
-        <div class="pull-right"><i ng-click="$ctrl.deleteTask()" class="glyphicon glyphicon-remove"></i></div>
+        <div ng-if="!$ctrl.updateMode" class="pull-right"><i ng-click="$ctrl.deleteTask()"
+                                                             class="glyphicon glyphicon-remove"></i></div>
     </div>
     <div class="row">
-        <div ng-bind-html="$ctrl.obj.description">
+        <div ng-if="!$ctrl.updateMode" ng-bind-html="$ctrl.obj.description">
 
         </div>
+        <div ng-if="$ctrl.updateMode">
+                    <textarea type="text" class="form-control"
+                              id="description"
+                              ng-model="$ctrl.obj.description"></textarea>
+        </div>
+
     </div>
     <div class="row">
-        <div class="col-xs-offset-2 col-xs-10 text-right">{{ $ctrl.obj.author.username }}</div>
+        <div ng-if="!$ctrl.updateMode" class="col-xs-offset-2 col-xs-10 text-right">{{ $ctrl.obj.author.username }}</div>
+        <div ng-if="$ctrl.updateMode" class="col-xs-offset-2 col-xs-10 text-right"><div ng-click="$ctrl.updateTask()" class="btn btn-primary">
+            {{$ctrl.createMode ? 'Add Task' : 'Update Task'}}
+        </div></div>
     </div>
-</div>
 </div>

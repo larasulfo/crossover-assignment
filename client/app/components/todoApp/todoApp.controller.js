@@ -3,10 +3,11 @@ class TodoAppController {
         "ngInject";
         this.name = 'todoApp';
         this.todoService = todoService;
+        this.$scope = $scope;
 
 
         this.$onInit = () => {
-            console.log(this.todoList);
+            this.loadingRequest={};
         };
 
         this.resetTasks();
@@ -28,7 +29,7 @@ class TodoAppController {
 
                 this.todoList[this.selectedIndex].status = target;
                 $scope.$apply();
-                this.editTodo(this.selectedIndex);
+                this.editTodo(this.todoList[this.selectedIndex],this.selectedIndex);
 
             } else {
                 this.resetTasks();
@@ -44,16 +45,31 @@ class TodoAppController {
 
     }
 
-    editTodo(index) {
-
-        let task = this.todoList[index];
+    editTodo(task,index) {
+        this.loadingRequest[index]=true;
+        this.resetTasks();
         this.todoService.editTodo(task).then((response) => {
-            console.log(response);
+            this.todoList[index]=response.plain();
+            this.loadingRequest[index]=false;
         });
     }
 
+    addTodo(){
+        this.todoList.push({
+            title:'Title',
+            description:'description',
+            status:'notCompleted',
+            createMode:true
+            }
+        );
+    }
+
+    updateTask(item,index){
+
+        this.editTodo(item,index);
+    }
+
     deleteTask(item) {
-        console.log(item);
         let index=this.todoList.findIndex((task) => {
             return item._id == task._id;
 
@@ -61,7 +77,7 @@ class TodoAppController {
 
 
         this.todoService.apiDeleteTask(item).then((response) => {
-            console.log(response);
+
         });
 
         this.todoList.splice(index,1);

@@ -4,8 +4,9 @@ import './task.scss';
 
 let taskComponent = {
   bindings: {
-      obj:'<',
-      onDelete:'&'
+      obj:'=',
+      onDelete:'&',
+      onUpdate:'&'
   },
   template,
   controller

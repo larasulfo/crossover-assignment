@@ -3,15 +3,15 @@
   <h1>Crossover Todo</h1>
 </div>
 <div class="row">
-    <div class="col-md-6 col-xs-12">
-        <div class="row">
-            <h1>In Progress</h1>
+    <div class="col-md-6 col-xs-12 bucket">
+        <div class="row bucket-header not-completed">
+            <h2>In Progress</h2>
         </div>
-        <div class="row" ondrop="angular.element(this).scope().dropItem('notCompleted')" ondragover="angular.element(this).scope().allowDrop(event)">
+        <div class="row bucket-list" ondrop="angular.element(this).scope().dropItem('notCompleted')" ondragover="angular.element(this).scope().allowDrop(event)">
             <div ng-repeat="task in $ctrl.todoList track by $index">
 
                 <div ng-if="task.status=='notCompleted'" class="row" draggable="{{!$ctrl.loadingRequest[$index]}}" ondragstart="angular.element(this).scope().pickItem(angular.element(this).scope().$index,'notCompleted')">
-                    <task obj="task" on-delete="$ctrl.deleteTask(item)" on-update="$ctrl.updateTask(item,$index)"  ></task>
+                    <task obj="task" on-delete="$ctrl.deleteTask(item)" on-update="$ctrl.updateTask(item,$index)" is-owner="task.author.username===$ctrl.userName ? true : false" ></task>
                 </div>
 
             </div>
@@ -20,15 +20,15 @@
             </div>
         </div>
     </div>
-    <div class="col-md-6 col-xs-12">
-        <div class="row">
-            <h1>Done</h1>
+    <div class="col-md-6 col-xs-12 bucket">
+        <div class="row bucket-header completed">
+            <h2>Done</h2>
         </div>
-        <div class="row" ondrop="angular.element(this).scope().dropItem('completed')" ondragover="angular.element(this).scope().allowDrop(event)">
+        <div class="row bucket-list" ondrop="angular.element(this).scope().dropItem('completed')" ondragover="angular.element(this).scope().allowDrop(event)">
             <div ng-repeat="task in $ctrl.todoList track by $index">
 
                 <div  ng-if="task.status=='completed'" class="row" draggable="{{!$ctrl.loadingRequest[$index]}}" ondragstart="angular.element(this).scope().pickItem(angular.element(this).scope().$index,'completed')">
-                    <task obj="task" on-delete="$ctrl.deleteTask(item)" on-update="$ctrl.updateTask(item,$index)" ></task>
+                    <task obj="task" on-delete="$ctrl.deleteTask(item)" on-update="$ctrl.updateTask(item,$index)"  is-owner="task.author.username===$ctrl.userName ? true : false"></task>
                 </div>
 
             </div>

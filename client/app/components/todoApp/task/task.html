@@ -9,7 +9,7 @@
                 </div>
             </div>
         </div>
-        <div ng-if="!$ctrl.updateMode" class="pull-right"><i ng-click="$ctrl.deleteTask()"
+        <div ng-if="!$ctrl.updateMode && $ctrl.isOwner" class="pull-right"><i ng-click="$ctrl.deleteTask()"
                                                              class="glyphicon glyphicon-remove"></i></div>
     </div>
     <div class="row">

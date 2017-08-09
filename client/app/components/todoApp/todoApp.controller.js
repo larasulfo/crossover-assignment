@@ -1,13 +1,14 @@
 class TodoAppController {
-    constructor($scope, todoService) {
+    constructor($scope, todoService,localStorageService) {
         "ngInject";
         this.name = 'todoApp';
         this.todoService = todoService;
-        this.$scope = $scope;
+        this._localStorageService = localStorageService;
 
 
         this.$onInit = () => {
-            this.loadingRequest={};
+            this.loadingRequest = {};
+            this.userName = this._localStorageService.get('username');
         };
 
         this.resetTasks();
@@ -29,7 +30,7 @@ class TodoAppController {
 
                 this.todoList[this.selectedIndex].status = target;
                 $scope.$apply();
-                this.editTodo(this.todoList[this.selectedIndex],this.selectedIndex);
+                this.editTodo(this.todoList[this.selectedIndex], this.selectedIndex);
 
             } else {
                 this.resetTasks();
@@ -45,32 +46,34 @@ class TodoAppController {
 
     }
 
-    editTodo(task,index) {
-        this.loadingRequest[index]=true;
+    editTodo(task, index) {
+        this.loadingRequest[index] = true;
         this.resetTasks();
         this.todoService.editTodo(task).then((response) => {
-            this.todoList[index]=response.plain();
-            this.loadingRequest[index]=false;
+            if (!this.todoList[index]._id) {
+                this.todoList[index]._id = response.plain()._id;
+            }
+            this.loadingRequest[index] = false;
         });
     }
 
-    addTodo(){
+    addTodo() {
         this.todoList.push({
-            title:'Title',
-            description:'description',
-            status:'notCompleted',
-            createMode:true
+                title: 'Title',
+                description: 'description',
+                status: 'notCompleted',
+                createMode: true
             }
         );
     }
 
-    updateTask(item,index){
+    updateTask(item, index) {
 
-        this.editTodo(item,index);
+        this.editTodo(item, index);
     }
 
     deleteTask(item) {
-        let index=this.todoList.findIndex((task) => {
+        let index = this.todoList.findIndex((task) => {
             return item._id == task._id;
 
         });
@@ -80,7 +83,7 @@ class TodoAppController {
 
         });
 
-        this.todoList.splice(index,1);
+        this.todoList.splice(index, 1);
     }
 
 

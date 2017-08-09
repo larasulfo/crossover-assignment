@@ -43,6 +43,17 @@ class TodoService {
         return deferred.promise;
     }
 
+    logOut(data) {
+        let deferred = this._$q.defer();
+        this._Restangular.one('user').one('logout').get(data).then((response) => {
+            deferred.resolve(response);
+        }).catch((e) => {
+            deferred.reject(e);
+        });
+
+        return deferred.promise;
+    }
+
     getTodos(skip, limit) {
         let deferred = this._$q.defer();
         let sessionId = this.checkLoginStatus();

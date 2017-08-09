@@ -1,7 +1,6 @@
 class NavbarController {
     constructor($state, todoService, localStorageService,$rootScope) {
         "ngInject";
-        this.name = 'navbar';
         this.todoService = todoService;
         this._localStorageService = localStorageService;
         this.$state = $state;

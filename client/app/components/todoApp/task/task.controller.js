@@ -1,7 +1,5 @@
 class TaskController {
     constructor() {
-        this.name = 'task';
-
         this.$onInit = () => {
             if (this.obj.createMode) {
                 this.createMode = true;

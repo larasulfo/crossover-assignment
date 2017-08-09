@@ -49,6 +49,7 @@ class TodoService {
             deferred.resolve(response);
         }).catch((e) => {
             deferred.reject(e);
+            this.checkErrors(e);
         });
 
         return deferred.promise;
@@ -86,6 +87,7 @@ class TodoService {
             deferred.resolve(response);
         }).catch((e) => {
             deferred.reject(e);
+            this.checkErrors(e);
         });
 
         return deferred.promise;
@@ -102,6 +104,7 @@ class TodoService {
             deferred.resolve(response);
         }).catch((e) => {
             deferred.reject(e);
+            this.checkErrors(e);
         });
 
         return deferred.promise;

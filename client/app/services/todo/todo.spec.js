@@ -19,10 +19,7 @@ describe('Todo', () => {
 
     describe('Service', () => {
         // controller specs
-        it('has a name property [REMOVE]', () => { // erase if removing this.name from the controller
-            let service = makeService();
-            expect(service).to.have.property('name');
-        });
+
     });
 
 

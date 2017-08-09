@@ -1,0 +1,19 @@
+<div class="row">
+    <div class="row">
+        <div class="pull-left">
+            <div>
+                <div class="col-xs-offset-2 col-xs-10">{{ $ctrl.obj.title }}</div>
+            </div>
+        </div>
+        <div class="pull-right"><i ng-click="$ctrl.deleteTask()" class="glyphicon glyphicon-remove"></i></div>
+    </div>
+    <div class="row">
+        <div ng-bind-html="$ctrl.obj.description">
+
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-xs-offset-2 col-xs-10 text-right">{{ $ctrl.obj.author.username }}</div>
+    </div>
+</div>
+</div>

@@ -8,6 +8,8 @@ import restangular from 'restangular';
 import localStorageModule from 'angular-local-storage';
 import cgNotify from '@cgross/angular-notify';
 import '@cgross/angular-notify/dist/angular-notify.css';
+import 'angular-sanitize';
+'ngSanitize';
 //import 'normalize.css';
 
 angular.module('app', [
@@ -17,7 +19,8 @@ angular.module('app', [
     Services,
     restangular,
     localStorageModule,
-    cgNotify
+    cgNotify,
+    'ngSanitize'
   ])
   .config(($locationProvider) => {
     "ngInject";

@@ -1,6 +1,6 @@
 class TodoService {
 
-    constructor($q, Restangular, localStorageService, notify,$state) {
+    constructor($q, Restangular, localStorageService, notify, $state) {
         "ngInject";
         this._Restangular = Restangular;
         this._$q = $q;
@@ -53,7 +53,7 @@ class TodoService {
 
             }).catch((resp) => {
 
-            this.checkErrors(resp);
+                this.checkErrors(resp);
 
             });
         }
@@ -62,17 +62,16 @@ class TodoService {
     }
 
 
-    editTodo(data){
+    editTodo(data) {
         let deferred = this._$q.defer();
         let sessionId = this.checkLoginStatus();
-        let todoObj={
-            id:data._id,
-            title:data.title,
-            description:data.description,
-            status:data.status,
+        let todoObj = {
+            id: data._id,
+            title: data.title,
+            description: data.description,
+            status: data.status,
         };
-        console.log(data);
-        this._Restangular.one('todo').customPUT(todoObj, null , {sessionId:sessionId}).then((response) => {
+        this._Restangular.one('todo').customPUT(todoObj, null, {sessionId: sessionId}).then((response) => {
             deferred.resolve(response);
         }).catch((e) => {
             deferred.reject(e);
@@ -81,6 +80,21 @@ class TodoService {
         return deferred.promise;
     }
 
+
+    apiDeleteTask(data) {
+        let deferred = this._$q.defer();
+        let sessionId = this.checkLoginStatus();
+        let todoObj = {
+            id: data._id,
+        };
+        this._Restangular.all('todo?sessionId=' + sessionId).customOperation("remove", null, null, null, todoObj).then((response) => {
+            deferred.resolve(response);
+        }).catch((e) => {
+            deferred.reject(e);
+        });
+
+        return deferred.promise;
+    }
 
 
 }

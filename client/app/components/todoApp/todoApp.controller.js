@@ -1,5 +1,5 @@
 class TodoAppController {
-    constructor($scope,todoService) {
+    constructor($scope, todoService) {
         "ngInject";
         this.name = 'todoApp';
         this.todoService = todoService;
@@ -26,7 +26,7 @@ class TodoAppController {
 
             if (target !== this.fromBucket) {
 
-                this.todoList[this.selectedIndex].status=target;
+                this.todoList[this.selectedIndex].status = target;
                 $scope.$apply();
                 this.editTodo(this.selectedIndex);
 
@@ -44,12 +44,27 @@ class TodoAppController {
 
     }
 
-    editTodo(index){
+    editTodo(index) {
 
-        let task=this.todoList[index];
-        this.todoService.editTodo(task).then((response)=>{
+        let task = this.todoList[index];
+        this.todoService.editTodo(task).then((response) => {
             console.log(response);
         });
+    }
+
+    deleteTask(item) {
+        console.log(item);
+        let index=this.todoList.findIndex((task) => {
+            return item._id == task._id;
+
+        });
+
+
+        this.todoService.apiDeleteTask(item).then((response) => {
+            console.log(response);
+        });
+
+        this.todoList.splice(index,1);
     }
 
 

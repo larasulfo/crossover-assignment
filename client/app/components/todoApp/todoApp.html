@@ -11,7 +11,7 @@
             <div ng-repeat="task in $ctrl.todoList track by $index">
 
                 <div ng-if="task.status=='notCompleted'" class="row" draggable="true" ondragstart="angular.element(this).scope().pickItem(angular.element(this).scope().$index,'notCompleted')">
-                    {{task.title}}
+                    <task obj="task" on-delete="$ctrl.deleteTask(item)" ></task>
                 </div>
 
             </div>
@@ -25,7 +25,7 @@
             <div ng-repeat="task in $ctrl.todoList track by $index">
 
                 <div  ng-if="task.status=='completed'" class="row" draggable="true" ondragstart="angular.element(this).scope().pickItem(angular.element(this).scope().$index,'completed')">
-                    {{task.title}}
+                    <task obj="task" on-delete="$ctrl.deleteTask(item)" ></task>
                 </div>
 
             </div>

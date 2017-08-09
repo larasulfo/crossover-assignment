@@ -10,6 +10,9 @@ class TodoService {
 
     }
 
+    /**
+     * before calls, checking login status
+     */
     checkLoginStatus() {
         let sessionId = this._localStorageService.get('sessionId');
         let username = this._localStorageService.get('username');
@@ -19,6 +22,11 @@ class TodoService {
             return sessionId;
         }
     }
+
+    /**
+     * handling erros, if user is not auth, clearing local vars
+     * @param resp
+     */
 
     checkErrors(resp) {
         if (resp.status.toString() === '401') {
@@ -32,6 +40,11 @@ class TodoService {
     }
 
 
+    /**
+     * login request
+     * @param data
+     * @returns {Function}
+     */
     login(data) {
         let deferred = this._$q.defer();
         this._Restangular.all('user').all('auth').post(data).then((response) => {
@@ -43,6 +56,11 @@ class TodoService {
         return deferred.promise;
     }
 
+    /**
+     * logout request
+     * @param data
+     * @returns {Function}
+     */
     logOut(data) {
         let deferred = this._$q.defer();
         this._Restangular.one('user').one('logout').get(data).then((response) => {
@@ -55,6 +73,12 @@ class TodoService {
         return deferred.promise;
     }
 
+    /**
+     * getting task list from api
+     * @param skip
+     * @param limit
+     * @returns {Function}
+     */
     getTodos(skip, limit) {
         let deferred = this._$q.defer();
         let sessionId = this.checkLoginStatus();
@@ -73,7 +97,12 @@ class TodoService {
         return deferred.promise;
     }
 
-
+    /**
+     * it inserts and updates to the task.
+     * formatting input object and sending with session id query paramteres
+     * @param data
+     * @returns {Function}
+     */
     editTodo(data) {
         let deferred = this._$q.defer();
         let sessionId = this.checkLoginStatus();
@@ -92,7 +121,12 @@ class TodoService {
 
         return deferred.promise;
     }
-
+    /**
+     * it deletes to the task.
+     * using id param of the task object, calling delete endpoint?sessionId with input object
+     * @param data
+     * @returns {Function}
+     */
 
     apiDeleteTask(data) {
         let deferred = this._$q.defer();

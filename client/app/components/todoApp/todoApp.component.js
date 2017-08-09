@@ -5,7 +5,7 @@ import './todoApp.scss';
 let todoAppComponent = {
     restrict: 'E',
     bindings: {
-        todoList: '<'
+        todoList: '='
     },
     template,
     controller

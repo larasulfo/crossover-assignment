@@ -1,20 +1,57 @@
 class TodoAppController {
-  constructor($scope) {
-      "ngInject";
-    this.name = 'todoApp';
+    constructor($scope,todoService) {
+        "ngInject";
+        this.name = 'todoApp';
+        this.todoService = todoService;
 
-      this.$onInit=()=>{
-          console.log(this.todoList);
-      };
 
-      $scope.pickItem=(item)=>{
-            console.log(item);
-      }
+        this.$onInit = () => {
+            console.log(this.todoList);
+        };
 
-  }
+        this.resetTasks();
 
-    // pickItem(item){
-    //     console.log(item);
-    // }
+        $scope.pickItem = (index, from) => {
+
+            this.selectedIndex = index;
+            this.fromBucket = from;
+
+        };
+
+        $scope.allowDrop = (event) => {
+            event.preventDefault();
+        };
+
+        $scope.dropItem = (target) => {
+
+            if (target !== this.fromBucket) {
+
+                this.todoList[this.selectedIndex].status=target;
+                $scope.$apply();
+                this.editTodo(this.selectedIndex);
+
+            } else {
+                this.resetTasks();
+            }
+        }
+
+    }
+
+
+    resetTasks() {
+        this.selectedIndex = false;
+        this.fromBucket = false;
+
+    }
+
+    editTodo(index){
+
+        let task=this.todoList[index];
+        this.todoService.editTodo(task).then((response)=>{
+            console.log(response);
+        });
+    }
+
+
 }
 export default TodoAppController;

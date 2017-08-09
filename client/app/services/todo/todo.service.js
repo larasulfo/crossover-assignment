@@ -49,20 +49,7 @@ class TodoService {
         if (sessionId) {
             this._Restangular.one('todos').get({sessionId: sessionId, skip: skip, limit: limit}).then((response) => {
 
-
-                let result={
-                    notCompleted:[],
-                    completed:[],
-                };
-                for(let todo of response.plain()){
-                    if(todo.status=='notCompleted'){
-                        result.notCompleted.push(todo);
-                    }else if(todo.status=='completed'){
-                        result.completed.push(todo);
-                    }
-                }
-
-                deferred.resolve(result);
+                deferred.resolve(response);
 
             }).catch((resp) => {
 
@@ -70,6 +57,26 @@ class TodoService {
 
             });
         }
+
+        return deferred.promise;
+    }
+
+
+    editTodo(data){
+        let deferred = this._$q.defer();
+        let sessionId = this.checkLoginStatus();
+        let todoObj={
+            id:data._id,
+            title:data.title,
+            description:data.description,
+            status:data.status,
+        };
+        console.log(data);
+        this._Restangular.one('todo').customPUT(todoObj, null , {sessionId:sessionId}).then((response) => {
+            deferred.resolve(response);
+        }).catch((e) => {
+            deferred.reject(e);
+        });
 
         return deferred.promise;
     }

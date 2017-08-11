@@ -1,18 +1,21 @@
-<div ng-dblclick="$ctrl.changeMode()" class="row">
+<div ng-dblclick="$ctrl.changeMode()" class="row task">
     <div class="row">
         <div class="pull-left">
-            <div>
-                <div ng-if="!$ctrl.updateMode" class="col-xs-offset-2 col-xs-10">{{ $ctrl.obj.title }}</div>
-                <div ng-if="$ctrl.updateMode" class="col-xs-offset-2 col-xs-10"><input type="text" class="form-control"
-                                                                                       id="title"
-                                                                                       ng-model="$ctrl.obj.title">
+            <div class="text-left">
+                <div ng-if="!$ctrl.updateMode" class="task-title">{{ $ctrl.obj.title }}</div>
+                <div ng-if="$ctrl.updateMode"><input type="text" class="form-control"
+                                                     id="title"
+                                                     ng-model="$ctrl.obj.title">
                 </div>
             </div>
         </div>
-        <div ng-if="!$ctrl.updateMode && $ctrl.isOwner" class="pull-right"><i ng-click="$ctrl.deleteTask()"
-                                                             class="glyphicon glyphicon-remove"></i></div>
+        <div class="text-right">
+            <div ng-if="!$ctrl.updateMode && $ctrl.isOwner" class="text-right"><i ng-click="$ctrl.deleteTask()"
+                                                                                  class="glyphicon glyphicon-remove"></i>
+            </div>
+        </div>
     </div>
-    <div class="row">
+    <div class="row task-detail">
         <div ng-if="!$ctrl.updateMode" ng-bind-html="$ctrl.obj.description">
 
         </div>
@@ -24,9 +27,13 @@
 
     </div>
     <div class="row">
-        <div ng-if="!$ctrl.updateMode" class="col-xs-offset-2 col-xs-10 text-right">{{ $ctrl.obj.author.username }}</div>
-        <div ng-if="$ctrl.updateMode" class="col-xs-offset-2 col-xs-10 text-right"><div ng-click="$ctrl.updateTask()" class="btn btn-primary">
-            {{$ctrl.createMode ? 'Add Task' : 'Update Task'}}
-        </div></div>
+        <div ng-if="!$ctrl.updateMode" class="col-xs-offset-2 col-xs-10 text-right task-author">{{
+            $ctrl.obj.author.username }}
+        </div>
+        <div ng-if="$ctrl.updateMode" class="col-xs-offset-2 col-xs-10 text-right">
+            <div ng-click="$ctrl.updateTask()" class="btn btn-primary">
+                {{$ctrl.createMode ? 'Add Task' : 'Update Task'}}
+            </div>
+        </div>
     </div>
 </div>

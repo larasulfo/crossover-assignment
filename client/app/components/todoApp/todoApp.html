@@ -1,38 +1,48 @@
-<div class="row">
-<div class="row">
-  <h1>Crossover Todo</h1>
-</div>
-<div class="row">
-    <div class="col-md-6 col-xs-12 bucket">
-        <div class="row bucket-header not-completed">
-            <h2>In Progress</h2>
+<div class="row bucket-container">
+    <div class="row">
+    <div class="col-md-12 col-xs-12">
+        <div class="bucket-header">
+            Crossover Todo
         </div>
-        <div class="row bucket-list" ondrop="angular.element(this).scope().dropItem('notCompleted')" ondragover="angular.element(this).scope().allowDrop(event)">
-            <div ng-repeat="task in $ctrl.todoList track by $index">
-
-                <div ng-if="task.status=='notCompleted'" class="row" draggable="{{!$ctrl.loadingRequest[$index]}}" ondragstart="angular.element(this).scope().pickItem(angular.element(this).scope().$index,'notCompleted')">
-                    <task obj="task" on-delete="$ctrl.deleteTask(item)" on-update="$ctrl.updateTask(item,$index)" is-owner="task.author.username===$ctrl.userName ? true : false" ></task>
-                </div>
-
+    </div>
+    </div>
+    <div class="row">
+        <div class="col-md-6 col-xs-12">
+            <div class="row bucket-header not-completed">
+               In Progress
             </div>
-            <div class="row text-center">
-                <div ng-click="$ctrl.addTodo()">Add new item</div>
+            <div class="row bucket" ondrop="angular.element(this).scope().dropItem('notCompleted')"
+                 ondragover="angular.element(this).scope().allowDrop(event)">
+                <div ng-repeat="task in $ctrl.todoList track by $index">
+
+                    <div ng-if="task.status=='notCompleted'" class="row" draggable="{{!$ctrl.loadingRequest[$index]}}"
+                         ondragstart="angular.element(this).scope().pickItem(angular.element(this).scope().$index,'notCompleted')">
+                        <task obj="task" on-delete="$ctrl.deleteTask(item)" on-update="$ctrl.updateTask(item,$index)"
+                              is-owner="task.author.username===$ctrl.userName ? true : false"></task>
+                    </div>
+
+                </div>
+                <div class="row text-center click-able">
+                    <div ng-click="$ctrl.addTodo()">Add new item</div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6 col-xs-12">
+            <div class="row bucket-header completed">
+                Done
+            </div>
+            <div class="row bucket" ondrop="angular.element(this).scope().dropItem('completed')"
+                 ondragover="angular.element(this).scope().allowDrop(event)">
+                <div ng-repeat="task in $ctrl.todoList track by $index">
+
+                    <div ng-if="task.status=='completed'" class="row" draggable="{{!$ctrl.loadingRequest[$index]}}"
+                         ondragstart="angular.element(this).scope().pickItem(angular.element(this).scope().$index,'completed')">
+                        <task obj="task" on-delete="$ctrl.deleteTask(item)" on-update="$ctrl.updateTask(item,$index)"
+                              is-owner="task.author.username===$ctrl.userName ? true : false"></task>
+                    </div>
+
+                </div>
             </div>
         </div>
     </div>
-    <div class="col-md-6 col-xs-12 bucket">
-        <div class="row bucket-header completed">
-            <h2>Done</h2>
-        </div>
-        <div class="row bucket-list" ondrop="angular.element(this).scope().dropItem('completed')" ondragover="angular.element(this).scope().allowDrop(event)">
-            <div ng-repeat="task in $ctrl.todoList track by $index">
-
-                <div  ng-if="task.status=='completed'" class="row" draggable="{{!$ctrl.loadingRequest[$index]}}" ondragstart="angular.element(this).scope().pickItem(angular.element(this).scope().$index,'completed')">
-                    <task obj="task" on-delete="$ctrl.deleteTask(item)" on-update="$ctrl.updateTask(item,$index)"  is-owner="task.author.username===$ctrl.userName ? true : false"></task>
-                </div>
-
-            </div>
-        </div>
-    </div>
-</div>
 </div>

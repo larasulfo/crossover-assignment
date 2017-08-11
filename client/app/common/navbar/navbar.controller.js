@@ -7,6 +7,9 @@ class NavbarController {
         this.$rootScope = $rootScope;
 
         let vm=this;
+        if(this._localStorageService.get('sessionId') && this._localStorageService.get('username')){
+            vm.authUser=true;
+        }
         $rootScope.$on('authUser',
             function (event, data) {
                 vm.authUser = data.status;

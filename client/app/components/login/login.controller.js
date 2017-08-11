@@ -11,9 +11,9 @@ class LoginController {
 
         //checking login status
         this.loading = true;
-        let sessionId = localStorageService.get('sessionId');
-        let username = localStorageService.get('username');
-        if (sessionId && username) {
+        this.sessionId = localStorageService.get('sessionId');
+        this.username = localStorageService.get('username');
+        if (this.sessionId && this.username) {
             this.$state.go('todo_app');
         } else {
             this.loading = false;

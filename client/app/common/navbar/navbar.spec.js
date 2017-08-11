@@ -11,7 +11,6 @@ describe('Navbar', () => {
     $state = $injector.get('$state');
     $location = $injector.get('$location');
     $compile = $injector.get('$compile');
-   // todoService = $injector.get('todoService');
   }));
 
   describe('Module', () => {

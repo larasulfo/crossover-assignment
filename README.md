@@ -12,10 +12,9 @@ Tools needed to run this app:
 NG6 uses Gulp to build and launch the development environment. After you have installed all dependencies, you may run the app. Running `npm start` will bundle the app with `webpack`, launch a development server, and watch all files. The port will be displayed in the terminal.
 
 
-##Folder Structure
+## Folder Structure
+
 client
-
-
 ⋅⋅app/
 ⋅⋅⋅⋅app.js * app entry file
 ⋅⋅⋅⋅app.html * app template

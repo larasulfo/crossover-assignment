@@ -7,6 +7,7 @@ describe('Login', () => {
     let makeController;
 
     beforeEach(window.module(LoginModule));
+    beforeEach(window.module("app"));
 
 
     beforeEach(inject(() => {

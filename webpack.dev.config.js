@@ -16,7 +16,7 @@ config.plugins = config.plugins.concat([
   new webpack.HotModuleReplacementPlugin(),
     // app environment vars
     new webpack.DefinePlugin({
-        'API_URL': JSON.stringify("http://localhost:4000/"),
+        'API_URL': JSON.stringify("http://localhost:4000/")
     })
 ]);
 

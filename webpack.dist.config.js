@@ -20,7 +20,10 @@ config.plugins = config.plugins.concat([
       // angular global variable, so we should keep it unchanged
       except: ['$super', '$', 'exports', 'require', 'angular']
     }
-  })
+  }),
+    new webpack.DefinePlugin({
+        'API_URL': JSON.stringify("http://localhost:4000/")
+    })
 ]);
 
 module.exports = config;

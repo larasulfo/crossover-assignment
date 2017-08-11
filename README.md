@@ -6,8 +6,6 @@ Tools needed to run this app:
 * `node` and `npm`
 
 ## Installing
-* `fork` this repo
-* `clone` your fork
 * `npm install` to install dependencies
 
 ## Running the App

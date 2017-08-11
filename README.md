@@ -14,6 +14,7 @@ NG6 uses Gulp to build and launch the development environment. After you have in
 
 ## Folder Structure
 
+```
 client
 ⋅⋅app/
 ⋅⋅⋅⋅app.js * app entry file

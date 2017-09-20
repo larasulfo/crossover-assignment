@@ -34,10 +34,10 @@ class LoginController {
 
                 if(response.status=='success'){
                     //defining auth user, and brodcasting to  navbar component
-                this.sessionId =response.sessionId ;
-                this.username =response.username ;
-                localStorageService.set('sessionId', this.sessionId);
-                localStorageService.set('username',  this.username);
+                let sessionId =response.sessionId ;
+                let username =response.username ;
+                localStorageService.set('sessionId', sessionId);
+                localStorageService.set('username',  username);
                 $rootScope.$broadcast('authUser', {status: true});
 
                 //redirecting app page
